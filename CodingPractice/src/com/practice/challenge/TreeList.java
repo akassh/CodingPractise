@@ -12,9 +12,48 @@ public class TreeList<T> {
 		TreeNode(E val) {
 			this.val = val;
 		}
+		@Override
+		public String toString() {
+			return val.toString() + " ";
+		}
 	}
 	
 	TreeNode<T> root;
+	
+	private TreeNode<T> getNextNode(TreeNode<T> p) {
+		if(p==null)
+			return p;
+		TreeNode<T> t = p.next;
+		while(t!=null) {
+			if(t.left!=null)
+				return t.left;
+			else if (t.right!=null)
+				return t.right;
+			t = t.next;
+		}
+		return null;
+	}
+	
+	public void connectTheLevelUsingNextReference() {
+		if(this.root==null)
+			return;
+		TreeNode<T> p = this.root;
+		p.next = null;
+		while(p!=null) {
+			for(TreeNode<T> q = p; q!=null; q = q.next) {
+				if(q.left!=null)
+					q.left.next = q.right!=null ? q.right : getNextNode(q); 
+				if(p.right!=null)
+					q.right.next = getNextNode(q);
+			}
+			if(p.left!=null)
+				p = p.left;
+			else if(p.right!=null)
+				p = p.right;
+			else 
+				p = getNextNode(p);
+		}
+	}
 	
 	public void sortedArraysToBinarySearchTree(T[] a) {
 		this.root = sortedArraysToBinarySearchTree(a, 0, a.length-1);
@@ -61,6 +100,23 @@ public class TreeList<T> {
 		return s;
 	}
 	
+	public void printLevelOrderUsingNext() {
+		if(this.root==null)
+			return;
+		TreeNode<T> p = this.root;
+		while(p!=null) {
+			for(TreeNode<T> q = p; q!=null; q = q.next)
+				System.out.print(q + "-->");
+			System.out.println();
+			if(p.left!=null)
+				p = p.left;
+			else if(p.right!=null)
+				p = p.right;
+			else 
+				p = getNextNode(p);
+		}
+	}
+	
 	@Override
 	public String toString() {
 		if(this.root==null)
@@ -93,6 +149,11 @@ public class TreeList<T> {
 		TreeList<Integer> list = new TreeList<Integer>();
 		list.sortedArraysToBinarySearchTree(a);
 		System.out.println(list);
+		System.out.println();
+		list.printLevelOrderUsingNext();
+		list.connectTheLevelUsingNextReference();
+		System.out.println();
+		list.printLevelOrderUsingNext();
 	}
 	
 }
