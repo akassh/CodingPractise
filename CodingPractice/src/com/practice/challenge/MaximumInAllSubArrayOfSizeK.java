@@ -24,15 +24,9 @@ public class MaximumInAllSubArrayOfSizeK {
 		}
 	}
 	
-	public static void printArray(int[] a) {
-		for (int i : a)
-			System.out.print( i + " ");
-		System.out.println();
-	}
-	
 	public static void main(String[] args) {
 		int[] a =  {1, 2, 3, 1, 4, 5, 2, 3, 6};
-		printArray(a);
+		ArraysUtility.printArray(a);
 		maximumInAllSubArrayOfSizeK(a,4);
 	}
 }

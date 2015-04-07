@@ -32,8 +32,7 @@ public class BitonicSubArray {
 	
 	public static void main(String[] args) {
 		int[] a = {20, 0, 1, 2, 3, 4, 2, 1};//{20, 4, 1, 2, 3, 4, 2, 10};
-		for (int i : a)
-			System.out.print(i + "\t");
+		ArraysUtility.printArray(a);
 		System.out.println();
 		System.out.println(bitonicSubArray(a));
 	}

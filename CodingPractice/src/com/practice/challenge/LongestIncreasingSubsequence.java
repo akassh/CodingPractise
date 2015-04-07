@@ -52,16 +52,10 @@ public class LongestIncreasingSubsequence {
 		 return s;
 	}
 	
-	public static void printArray(int[] a) {
-		for (int i : a)
-			System.out.print( i + " ");
-		System.out.println();
-	}
-	
 	public static void main(String[] args) {
 		int[] a = {10, 22, 9, 33, 21, 50, 41, 60};//{1, 2, 3, 1, 4, 5, 2, 3, 6};
-		printArray(a);
-		printArray(getSizeOfLongestIncreasingSubsequence2(a));
+		ArraysUtility.printArray(a);
+		ArraysUtility.printArray(getSizeOfLongestIncreasingSubsequence2(a));
 		//System.out.println(getSizeOfLongestIncreasingSubsequence(a));
 	}
 }
