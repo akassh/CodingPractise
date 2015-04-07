@@ -1,5 +1,7 @@
+/**
+ * @author Akassh
+ */
 package com.practice.challenge;
-
 import java.util.Arrays;
 
 public class LongestIncreasingSubsequence {

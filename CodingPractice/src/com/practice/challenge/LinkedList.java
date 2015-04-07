@@ -1,3 +1,6 @@
+/**
+ * @author Akassh
+ */
 package com.practice.challenge;
 
 public class LinkedList<T> {

@@ -1,5 +1,9 @@
 package com.practice.challenge;
-
+/**
+ * 
+ * @author Akassh
+ *
+ */
 public class BitonicSubArray {
 	
 	public static int bitonicSubArray(int[] A) {
