@@ -3,16 +3,41 @@
  */
 package com.practice.challenge;
 
+class ListNode<E> {
+	
+	E val;
+	ListNode<E> next;
+	
+	public ListNode(E val) {
+		this.val = val;
+	}
+	
+	@Override
+	public String toString() {
+		return "ListNode [val=" + val + "]";
+	}
+}
+
 public class LinkedList<T> {
 	private ListNode<T> head;
 	private ListNode<T> last;
 	
-	private class ListNode<E> {
-		E val;
-		ListNode<E> next;
+	public ListNode<T> getHead() {
+		return head;
+	}
+
+	public void setHead(ListNode<T> head) {
+		this.head = head;
+	}
+
+	public LinkedList() {
 		
-		public ListNode(E val) {
-			this.val = val;
+	}
+	
+	public LinkedList(ListNode<T> list) {
+		if(list!=null) {
+			for(ListNode<T> temp = list;temp!=null;temp = temp.next)
+				this.insertNodeInBeginning(temp.val);
 		}
 	}
 	
@@ -40,6 +65,38 @@ public class LinkedList<T> {
 			last = last.next;
 		}
 		return head;
+	}
+	
+	public static ListNode<?> getMiddleNode(ListNode<?> head) {
+		if(head==null || head.next==null)
+			return head;
+		ListNode<?> curr = head;
+		ListNode<?> mrkr = head.next;
+		while(mrkr!=null&&mrkr.next!=null) {
+			curr = curr.next;
+			mrkr = mrkr.next.next;
+		}
+		return curr;
+	}
+	
+	public static int getNumberOfNodes(ListNode<?> head) {
+		int count = 0;
+		for(ListNode<?> curr = head;curr!=null;curr = curr.next,++count);
+		return count;
+	}
+	
+	public static ListNode<?> getPreviousOfMiddleNode(ListNode<?> head) {
+		if(head==null || head.next==null)
+			return head;
+		ListNode<?> prev = null;
+		ListNode<?> curr = head;
+		ListNode<?> mrkr = head.next;
+		while(mrkr!=null&&mrkr.next!=null) {
+			prev = curr;
+			curr = curr.next;
+			mrkr = mrkr.next.next;
+		}
+		return prev;
 	}
 	
 	public void segregateEvenAndOdd() {
@@ -150,6 +207,7 @@ public class LinkedList<T> {
 		for(int i=0;i<10;++i)
 			list.insertNodeInEnd(i);
 		System.out.println(list);
+		
 		list.segregateEvenAndOdd();
 		System.out.println(list);
 		list.reverseList(5);

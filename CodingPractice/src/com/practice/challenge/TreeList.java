@@ -1,9 +1,9 @@
-package com.practice.challenge;
 /**
  * 
  * @author Akassh
  * 
  */
+package com.practice.challenge;
 import java.util.ArrayDeque;
 import java.util.Queue;
 
@@ -59,11 +59,31 @@ public class TreeList<T> {
 		}
 	}
 	
+	
+	//head needs to be outside for reference
+	private ListNode<T> head = null;
+	public void sortedLinkedListToBinarySearchTree(ListNode<T> head) {
+		int n = LinkedList.getNumberOfNodes(head);
+		if(n==0)
+			return;
+		this.head = head;
+		this.root = sortedLinkedListToBinarySearchTree(n);
+	}
+	
+	private TreeNode<T> sortedLinkedListToBinarySearchTree(int n) {
+		if(n<=0)
+			return null;
+		TreeNode<T> left = sortedLinkedListToBinarySearchTree(n/2);
+		TreeNode<T> root = new TreeNode<T>(head.val);
+		root.left = left;
+		head = head.next;
+		root.right = sortedLinkedListToBinarySearchTree(n-n/2-1);
+		return root;
+	}
+	
 	public void sortedArraysToBinarySearchTree(T[] a) {
 		this.root = sortedArraysToBinarySearchTree(a, 0, a.length-1);
 	}
-	
-	
 	
 	private TreeNode<T> sortedArraysToBinarySearchTree(T[] a, int low, int high) {
 		if(high < low || low < 0 || high >= a.length)
@@ -149,15 +169,22 @@ public class TreeList<T> {
 	}
 	
 	public static void main(String[] args) {
-		Integer[] a = {1,2,3,4,5,6,7,8,9,10,11};
+		/*Integer[] a = {1,2,3,4,5,6,7,8,9,10,11};
 		TreeList<Integer> list = new TreeList<Integer>();
-		list.sortedArraysToBinarySearchTree(a);
-		System.out.println(list);
+		list.sortedArraysToBinarySearchTree(a);*/
+		LinkedList<Integer> linkedList = new LinkedList<Integer>();
+		for(int i=1;i<10;++i)
+			linkedList.insertNodeInEnd(i);
+		System.out.println(linkedList);
+		TreeList<Integer> treeList = new TreeList<Integer>();
+		treeList.sortedLinkedListToBinarySearchTree(linkedList.getHead());
+		
+		
+		System.out.println(treeList);
 		System.out.println();
-		list.printLevelOrderUsingNext();
-		list.connectTheLevelUsingNextReference();
+		treeList.connectTheLevelUsingNextReference();
 		System.out.println();
-		list.printLevelOrderUsingNext();
+		treeList.printLevelOrderUsingNext();
 	}
 	
 }
