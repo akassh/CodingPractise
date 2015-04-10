@@ -22,7 +22,6 @@ public class ArraysTestCases {
 	@Test
 	public void testSubArrayDoestNotExist() {
 		int[] a = {1, 4};
-		int[] result = null;
-		assertArrayEquals(FindSubArrayWithGivenSum.findSubArrayWithGivenSum(a, 0), result);
+		assertNull("Sub-Array Doest Not Exist", FindSubArrayWithGivenSum.findSubArrayWithGivenSum(a, 0));
 	}
 }
