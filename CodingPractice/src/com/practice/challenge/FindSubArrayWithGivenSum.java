@@ -7,19 +7,15 @@ public class FindSubArrayWithGivenSum {
 		int start = 0;
 		int currSum = A[start];
 		for(int i=1;i<A.length;++i) {
-			while(start < i && currSum > sum) {
+			while(start < i && currSum > sum)
 				currSum -= A[start++];
+			if(start==i && sum==A[start]) {
+				int[] result = new int[2];
+				result[0] = start;
+				result[1] = start;
+				return result;
 			}
-			if(start==i){
-				if(sum==A[start]) {
-					int[] result = new int[2];
-					result[0] = start;
-					result[1] = start;
-					return result;
-				}
-				break;
-			}
-			else if(currSum==sum) {
+			else if(currSum==sum && start<i) {
 				int[] result = new int[2];
 				result[0] = start;
 				result[1] = i-1;
