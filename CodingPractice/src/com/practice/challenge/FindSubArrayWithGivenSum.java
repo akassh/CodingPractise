@@ -25,23 +25,8 @@ public class FindSubArrayWithGivenSum {
 				result[1] = i-1;
 				return result;
 			} 
-				
 			currSum += A[i]; 
 		}
 		return null;
-	}
-	
-	public static void main(String[] args) {
-		int[] a = {1, 4, 20, 3, 10, 5};
-		ArraysUtility.printArray(a);
-		ArraysUtility.printArray(findSubArrayWithGivenSum(a, 33));
-		
-		int[] b = {1, 3, 0, 0, 3, 10, 5};
-		ArraysUtility.printArray(b);
-		ArraysUtility.printArray(findSubArrayWithGivenSum(b, 5));
-		
-		int[] c = {1, 4};
-		ArraysUtility.printArray(c);
-		ArraysUtility.printArray(findSubArrayWithGivenSum(c, 0));
 	}
 }
