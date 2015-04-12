@@ -4,6 +4,13 @@
 package com.practice.challenge;
 
 public class MagicSquare {
+	/**
+	 * Algo 
+	 * move i+1, j+1 if that cell is not filled
+	 * 		else move i-1, j
+	 * @param n
+	 * @return
+	 */
 	public static int[][] generateMagicSquare(int n) {
 		int[][] magicSquare = new int[n][n];
 		for(int c=1,i=n-1,j=n/2;c<=n*n;++c) {
