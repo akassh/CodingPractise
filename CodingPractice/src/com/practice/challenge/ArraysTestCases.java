@@ -1,12 +1,11 @@
 package com.practice.challenge;
 
 import static org.junit.Assert.*;
-
 import org.junit.Test;
 
 public class ArraysTestCases {
 	
-/*	//Find Sub-Array With Given Sum
+	//Find Sub-Array With Given Sum
 	@Test
 	public void testSubArrayExistInMiddle() {
 		int[] a = {1, 4, 20, 3, 10, 5};
@@ -31,7 +30,7 @@ public class ArraysTestCases {
 		//ArraysUtility.printArray(a);
 		//ArraysUtility.printArray(FindSubArrayWithGivenSum.findSubArrayWithGivenSum(a, 0));
 		assertNull("Sub-Array Doest Not Exist", FindSubArrayWithGivenSum.findSubArrayWithGivenSum(a, 0));
-	}*/
+	}
 	
 	//Find Minimum Distance Between Two Given Numbers
 	@Test(expected=IllegalArgumentException.class)
@@ -93,4 +92,27 @@ public class ArraysTestCases {
 		//System.out.println("Distance: " + FindMinimumDistanceBetweenTwoGivenNumbers.findMinimumDistanceBetweenTwoGivenNumbers(A, 3, 2));
 		assertEquals(FindMinimumDistanceBetweenTwoGivenNumbers.findMinimumDistanceBetweenTwoGivenNumbers(A, 3, 2),1);
 	}
+	
+	@Test
+	public void testWithDuplicates3() {
+		int[] A = {3, 5, 4, 2, 6, 3, 0, 0, 5, 4, 8, 3};
+		ArraysUtility.printArray(A);
+		System.out.println("Distance: " + FindMinimumDistanceBetweenTwoGivenNumbers.findMinimumDistanceBetweenTwoGivenNumbers(A, 3, 6));
+		assertEquals(FindMinimumDistanceBetweenTwoGivenNumbers.findMinimumDistanceBetweenTwoGivenNumbers(A, 3, 6),1);
+	}
+	
+	/*@Test(expected=IllegalArgumentException.class)
+	public void testWithNullArrayEggDroping() {
+		int[] A = null;
+		//ArraysUtility.printArray(A);
+		EggDroppingProblem.findMinimumDistanceBetweenTwoGivenNumbers(A, 1, 2);
+	}
+	
+	@Test
+	public void testWithEmptyArray() {
+		int[] A = {};
+		//ArraysUtility.printArray(A);
+		assertEquals(FindMinimumDistanceBetweenTwoGivenNumbers.findMinimumDistanceBetweenTwoGivenNumbers(A, 1, 2), Integer.MAX_VALUE);
+	}*/
+	
 }

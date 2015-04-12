@@ -169,9 +169,13 @@ public class TreeList<T> {
 	}
 	
 	public static void main(String[] args) {
-		/*Integer[] a = {1,2,3,4,5,6,7,8,9,10,11};
+		/*Integer[] a = {-8, -2, -4,10,0,7,0};
 		TreeList<Integer> list = new TreeList<Integer>();
-		list.sortedArraysToBinarySearchTree(a);*/
+		list.sortedArraysToBinarySearchTree(a);
+		System.out.println(list);
+		List<Integer> cList = new ArrayList<Integer>();;
+		System.out.println(list.maxSumOfRootToLeafPath(cList));
+		System.out.println(cList);
 		LinkedList<Integer> linkedList = new LinkedList<Integer>();
 		for(int i=1;i<10;++i)
 			linkedList.insertNodeInEnd(i);
@@ -184,7 +188,7 @@ public class TreeList<T> {
 		System.out.println();
 		treeList.connectTheLevelUsingNextReference();
 		System.out.println();
-		treeList.printLevelOrderUsingNext();
+		treeList.printLevelOrderUsingNext();*/
 	}
 	
 }

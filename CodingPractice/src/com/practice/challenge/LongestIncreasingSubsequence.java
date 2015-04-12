@@ -2,7 +2,9 @@
  * @author Akassh
  */
 package com.practice.challenge;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class LongestIncreasingSubsequence {
 	
@@ -52,10 +54,56 @@ public class LongestIncreasingSubsequence {
 		 return s;
 	}
 	
+	
+	public static int ceiling(List<Integer> A, int low, int high, int key) {
+		while(high - low > 1) {
+			int mid = (low+high)/2;
+			if(A.get(mid) >= key)
+				high = mid;
+			else 
+				low = mid;
+		}
+		return high;
+	}
+	
+	//O(nLog(n))
+	/**
+	 * @author Akassh
+	 * 
+	 * @return
+	 */
+	public static List<Integer> longestIncreasingSubsequenceVersion2(int[] A) {
+		if(A==null||A.length==0)
+			return null;
+		List<Integer> list = new ArrayList<Integer>();
+		list.add(A[0]);
+		for(int i=0;i<A.length;++i) {
+			if(A[i] < list.get(0)) {
+				list.remove(0);
+				list.add(0, A[i]);
+			}
+			else if(A[i] > list.get(list.size()-1))
+				list.add(A[i]);
+			else {
+				int index = ceiling(list, 0, list.size()-1, A[i]);
+				list.remove(index);
+				list.add(index, A[i]);
+			}
+				
+		}
+		return list;
+	}
+	
+	
 	public static void main(String[] args) {
+		int[] x = {1,2,3,7,9,10};
+		System.out.println(longestIncreasingSubsequenceVersion2(x));
+		System.out.println();
+		
 		int[] a = {10, 22, 9, 33, 21, 50, 41, 60};//{1, 2, 3, 1, 4, 5, 2, 3, 6};
 		ArraysUtility.printArray(a);
 		ArraysUtility.printArray(getSizeOfLongestIncreasingSubsequence2(a));
-		//System.out.println(getSizeOfLongestIncreasingSubsequence(a));
+		System.out.println(longestIncreasingSubsequenceVersion2(a));
+		System.out.println(getSizeOfLongestIncreasingSubsequence(a));
 	}
 }
