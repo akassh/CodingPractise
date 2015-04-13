@@ -13,6 +13,8 @@ public class FindTwoNumbersWithOddOccurrencesInUnsortedArray {
 		int xor = 0;
 		for (int i : A)
 			xor ^= i;
+		if(xor==0)
+			return null;
 		int b = (xor & -xor);
 		int xor1=0,xor2=0;
 		for (int i : A)
@@ -29,14 +31,14 @@ public class FindTwoNumbersWithOddOccurrencesInUnsortedArray {
 	public static void main(String[] args) {
 		int[] A = {12, 23, 34, 12, 12, 23, 12, 45};
 		ArraysUtility.printArray(A);
-		ArraysUtility.printArray(findTwoNumbersWithOddOccurrencesInUnsortedArray(A));
+		System.out.print("-->");ArraysUtility.printArray(findTwoNumbersWithOddOccurrencesInUnsortedArray(A));
 		
 		int[] B = {4, 4, 100, 5000, 4, 4, 4, 4, 100, 100};
 		ArraysUtility.printArray(B);
-		ArraysUtility.printArray(findTwoNumbersWithOddOccurrencesInUnsortedArray(B));
+		System.out.print("-->");ArraysUtility.printArray(findTwoNumbersWithOddOccurrencesInUnsortedArray(B));
 		
 		int[] C = {10, 20};
 		ArraysUtility.printArray(C);
-		ArraysUtility.printArray(findTwoNumbersWithOddOccurrencesInUnsortedArray(C));
+		System.out.print("-->");ArraysUtility.printArray(findTwoNumbersWithOddOccurrencesInUnsortedArray(C));
 	}
 }
