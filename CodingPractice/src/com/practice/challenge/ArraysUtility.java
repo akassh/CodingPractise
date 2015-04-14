@@ -11,12 +11,12 @@ public class ArraysUtility {
 		System.out.println();
 	}
 	
-	public static void printArray(Integer[] a) {
+	public static <T> void printArray(T[] a) {
 		if(a==null||a.length==0) {
 			System.out.println();
 			return;
 		}
-		for (int i : a)
+		for (T i : a)
 			System.out.print( i + " ");
 		System.out.println();
 	}
