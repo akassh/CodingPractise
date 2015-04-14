@@ -49,10 +49,7 @@ public class InterLeavingStrings {
 				k++;
 			else 
 				return false;
-		if(j == s1.length() && k == s2.length())
-			return true;
-		else 
-			return false;
+		return (j == s1.length() && k == s2.length());
 	}
 	
 	public static void main(String[] args) {
