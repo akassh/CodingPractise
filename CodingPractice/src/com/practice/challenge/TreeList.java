@@ -7,20 +7,22 @@ package com.practice.challenge;
 import java.util.ArrayDeque;
 import java.util.Queue;
 
-public class TreeList<T> {
-	private class TreeNode<E> {
-		E val;
-		TreeNode<E> left;
-		TreeNode<E> right;
-		TreeNode<E> next;
-		TreeNode(E val) {
-			this.val = val;
-		}
-		@Override
-		public String toString() {
-			return val.toString() + " ";
-		}
+class TreeNode<E> {
+	E val;
+	TreeNode<E> left;
+	TreeNode<E> right;
+	TreeNode<E> next;
+	TreeNode(E val) {
+		this.val = val;
 	}
+	@Override
+	public String toString() {
+		return val.toString() + " ";
+	}
+}
+
+public class TreeList<T> {
+	
 	
 	TreeNode<T> root;
 	
@@ -124,6 +126,23 @@ public class TreeList<T> {
 		return s;
 	}
 	
+	public static <T> void flatteningToLinkList(TreeNode<T> root) {
+		if(root==null)
+			return;
+		else if(root.left==null)
+			flatteningToLinkList(root.right);
+		else {
+			TreeNode<T> r = root.right;
+			root.right = root.left;
+			root.left = null;
+			TreeNode<T> temp = root.right;
+			while(temp.right!=null)
+				temp=temp.right;
+			temp.right = r;
+			flatteningToLinkList(root.right);
+		}
+	}
+	
 	public void printLevelOrderUsingNext() {
 		if(this.root==null)
 			return;
@@ -169,11 +188,13 @@ public class TreeList<T> {
 	}
 	
 	public static void main(String[] args) {
-		/*Integer[] a = {-8, -2, -4,10,0,7,0};
+		Integer[] a = {-8, -2, -4,10,0,7,0};
 		TreeList<Integer> list = new TreeList<Integer>();
 		list.sortedArraysToBinarySearchTree(a);
 		System.out.println(list);
-		List<Integer> cList = new ArrayList<Integer>();;
+		list.flatteningToLinkList(list.root);
+		System.out.println(list);
+		/*List<Integer> cList = new ArrayList<Integer>();;
 		System.out.println(list.maxSumOfRootToLeafPath(cList));
 		System.out.println(cList);
 		LinkedList<Integer> linkedList = new LinkedList<Integer>();
