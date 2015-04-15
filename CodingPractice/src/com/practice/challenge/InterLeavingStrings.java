@@ -39,7 +39,14 @@ public class InterLeavingStrings {
 			getListOfInterLeavingOfTwoString( s1, s2, i, j+1, interLeavedString + s2.charAt(j), interLeavedList);
 	}
 	
-	public boolean IsInterLeavingOfTwoString(String s1, String s2, String check) {
+	/**
+	 * Fails for few cases
+	 * @param s1
+	 * @param s2
+	 * @param check
+	 * @return
+	 */
+	public boolean isInterLeavingOfTwoStringNotValidForRepeatingString(String s1, String s2, String check) {
 		int j=0;
 		int k=0;
 		for(int i=0;i<check.length();++i)
@@ -52,10 +59,36 @@ public class InterLeavingStrings {
 		return (j == s1.length() && k == s2.length());
 	}
 	
+	public boolean isInterLeavingOfTwoStringDynamicProgramming(String s1, String s2, String c) {
+		if(s1==null||s2==null||c==null)
+			return false;
+		if(s1.isEmpty() && s2.isEmpty() && c.isEmpty())
+			return true;
+		if(s1.length() + s2.length() != c.length())
+			return false;
+		boolean[][] m = new boolean[s1.length()+1][s2.length()+1];
+		for(int i=0;i<=s1.length();++i)
+			for(int j=0;j<=s2.length();++j) {
+				if(i==0 && j==0)
+					m[i][j] = true;
+				else if(i==0 && j<=s2.length() && s2.charAt(j-1)==c.charAt(j-1))
+					m[i][j] = m[i][j-1];
+				else if(j==0 && i<=s1.length() && s1.charAt(i-1)==c.charAt(i-1))
+					m[i][j] = m[i-1][j];
+				else if(i>=1 && j>=1 && i<=s1.length() && j<=s2.length() && s1.charAt(i-1)==c.charAt(i+j-1) && s2.charAt(j-1)!=c.charAt(i+j-1) )
+					m[i][j] = m[i-1][j];
+				else if(i>=1 && j>=1 && i<=s1.length() && j<=s2.length() && s1.charAt(i-1)!=c.charAt(i+j-1) && s2.charAt(j-1)==c.charAt(i+j-1) )
+					m[i][j] = m[i][j-1];
+				else if(i>=1 && j>=1 && i<=s1.length() && j<=s2.length() && s1.charAt(i-1)==c.charAt(i+j-1) && s2.charAt(j-1)==c.charAt(i+j-1) )
+					m[i][j] = m[i][j-1] || m[i-1][j] ;
+			}
+		return m[s1.length()][s2.length()];
+	}
+	
 	public static void main(String[] args) {
 		InterLeavingStrings s = new InterLeavingStrings();
 		s.printInterLeavingOfTwoString("AB", "CD");
 		ArraysUtility.printArray(s.getListOfInterLeavingOfTwoString("AB", "CD"));
-		System.out.println(s.IsInterLeavingOfTwoString("AB", "CD", "ACDB"));
+		System.out.println(s.isInterLeavingOfTwoStringDynamicProgramming("", "B", "B"));
 	}
 }
