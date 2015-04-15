@@ -6,9 +6,16 @@ import java.util.List;
 public class MaxHeap {
 	
 	private List<Integer> heap;
+	private boolean minHeapIndicator;
 	
 	public MaxHeap() {
 		this.heap = new ArrayList<Integer>();
+		this.minHeapIndicator = false;
+	}
+	
+	public MaxHeap(boolean minHeap) {
+		this.heap = new ArrayList<Integer>();
+		this.minHeapIndicator = minHeap;
 	}
 	
 	public int top() {
@@ -40,7 +47,7 @@ public class MaxHeap {
 		int index = heap.size()-1;
 		while(index>=0) {
 			int parent = (index - 1) < 0 ? -1 : (index-1)/2;
-			if(parent<0 || heap.get(parent) > heap.get(index))
+			if(parent<0 || (Math.max(heap.get(parent),heap.get(index)) == heap.get(parent))^minHeapIndicator)
 				break;
 			else {
 				int ptemp = heap.get(parent);
@@ -64,14 +71,14 @@ public class MaxHeap {
 		while(index < heap.size()) {
 			int maxIndex = -1;
 			if(2*index+1<heap.size() && 2*index+2<heap.size())
-				maxIndex =  Math.max(heap.get(2*index+1), heap.get(2*index+2)) == heap.get(2*index+1)? 2*index+1  : 2*index+2;
+				maxIndex =  (Math.max(heap.get(2*index+1), heap.get(2*index+2)) == heap.get(2*index+1)^minHeapIndicator)? 2*index+1  : 2*index+2;
 			else if(2*index+1<heap.size())
 				maxIndex =  2*index+1;
 			else if(2*index+2<heap.size())
 				maxIndex =  2*index+2;
 			if(maxIndex==-1) 
 				break;
-			else if(heap.get(index) < heap.get(maxIndex)) {
+			else if((heap.get(index) < heap.get(maxIndex))^minHeapIndicator) {
 					int ptemp = heap.get(index);
 					int ctemp = heap.get(maxIndex);
 					heap.remove(index);
@@ -92,7 +99,7 @@ public class MaxHeap {
 	
 	public static void main(String[] args) {
 		int[] x = {1, 2, 3 ,4 ,5 ,6 ,7 ,8 , 9};
-		MaxHeap maxheap = new MaxHeap(); 
+		MaxHeap maxheap = new MaxHeap(true); 
 		for (int i : x)
 			maxheap.insert(i);
 		System.out.println(maxheap);
