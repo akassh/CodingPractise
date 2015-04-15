@@ -59,8 +59,11 @@ public class PowerSetUsingGosperHack {
 	}
 	
 	public static void main(String[] args) {
-		Integer[] s = {1, 2, 3,4};
-		System.out.println(generatePowerSet(s));	
+		Integer[] s = {1, 2, 3,4, 5};
+		for (List<Integer> integer : generatePowerSet(s)) {
+			System.out.println(integer);
+		}
+			
 		/*for(int i=1;i<Math.pow(2, 3); i = getGospelHackNextPermutation(i))
 			
 				System.out.println(Integer.toBinaryString(i));*/
