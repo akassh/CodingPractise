@@ -10,7 +10,7 @@ public class StringPermutation {
 	    	System.out.println(prefix);
 	    else
 	        for (int i = 0; i < str.length(); i++)
-	            permutation(prefix + str.charAt(i), str);
+	            permutationWithRepetition(prefix + str.charAt(i), str);
 	}
 	
 	public static void permutation(String str) { 
@@ -26,6 +26,7 @@ public class StringPermutation {
 	}
 	
 	public static void main(String[] args) {
-		permutation("ABCD");
+		permutation("AB");
+		permutationWithRepetition("AB");
 	}
 }
