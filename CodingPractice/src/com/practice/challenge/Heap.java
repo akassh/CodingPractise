@@ -6,16 +6,16 @@ import java.util.List;
 public class Heap {
 	
 	private List<Integer> heap;
-	private boolean minHeapIndicator;
+	private boolean minHeapFlag;
 	
 	public Heap() {
 		this.heap = new ArrayList<Integer>();
-		this.minHeapIndicator = false;
+		this.minHeapFlag = false;
 	}
 	
-	public Heap(boolean minHeap) {
+	public Heap(boolean minHeapFlag) {
 		this.heap = new ArrayList<Integer>();
-		this.minHeapIndicator = minHeap;
+		this.minHeapFlag = minHeapFlag;
 	}
 	
 	public int top() {
@@ -47,7 +47,7 @@ public class Heap {
 		int index = heap.size()-1;
 		while(index>=0) {
 			int parent = (index - 1) < 0 ? -1 : (index-1)/2;
-			if(parent<0 || (Math.max(heap.get(parent),heap.get(index)) == heap.get(parent))^minHeapIndicator)
+			if(parent<0 || (Math.max(heap.get(parent),heap.get(index)) == heap.get(parent))^minHeapFlag)
 				break;
 			else {
 				int ptemp = heap.get(parent);
@@ -71,14 +71,14 @@ public class Heap {
 		while(index < heap.size()) {
 			int maxIndex = -1;
 			if(2*index+1<heap.size() && 2*index+2<heap.size())
-				maxIndex =  (Math.max(heap.get(2*index+1), heap.get(2*index+2)) == heap.get(2*index+1)^minHeapIndicator)? 2*index+1  : 2*index+2;
+				maxIndex =  (Math.max(heap.get(2*index+1), heap.get(2*index+2)) == heap.get(2*index+1)^minHeapFlag)? 2*index+1  : 2*index+2;
 			else if(2*index+1<heap.size())
 				maxIndex =  2*index+1;
 			else if(2*index+2<heap.size())
 				maxIndex =  2*index+2;
 			if(maxIndex==-1) 
 				break;
-			else if((heap.get(index) < heap.get(maxIndex))^minHeapIndicator) {
+			else if((heap.get(index) < heap.get(maxIndex))^minHeapFlag) {
 					int ptemp = heap.get(index);
 					int ctemp = heap.get(maxIndex);
 					heap.remove(index);
@@ -92,13 +92,21 @@ public class Heap {
 		}
 	}
 	
+	public boolean isEmpty() {
+		return (heap==null||heap.size()==0);
+	}
+	
+	public static int balanced(Heap l, Heap r) {
+		return Integer.compare(l.size(), r.size());
+	}
+	
 	@Override
 	public String toString() {
 		return this.heap.toString();
 	}
 	
 	public static void main(String[] args) {
-		int[] x = {1, 2, 3 ,4 ,5 ,6 ,7 ,8 , 9};
+		int[] x = {1, 2, 6, 5, 4, 3, 7, 8, 9};
 		Heap maxheap = new Heap(true); 
 		for (int i : x)
 			maxheap.insert(i);
