@@ -32,9 +32,9 @@ public class EggDroppingProblem {
 				else {
 					m[i][j] = Integer.MAX_VALUE;
 					for(int k=1;k<=i;++k) {
-						int min = Math.max(m[k-1][j-1], m[i-k][j]);
+						int min = 1+Math.max(m[k-1][j-1], m[i-k][j]);
 						if(m[i][j] > min) 
-							m[i][j] = min+1;
+							m[i][j] = min;
 					}
 				}
 		return m;			
