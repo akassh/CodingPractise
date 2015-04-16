@@ -68,7 +68,7 @@ public class NQueenProblem {
 			ArraysUtility.printMatrix(nQueen.getMatrixFormForNQueen());
 		}
 		NQueenProblem nQueen2 = new NQueenProblem(8);
-		System.out.println(nQueen2.countNQueenProblem()/4);
+		System.out.println(nQueen2.countNQueenProblem());
 			
 	}
 }
