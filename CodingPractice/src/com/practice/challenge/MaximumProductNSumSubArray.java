@@ -1,5 +1,9 @@
 package com.practice.challenge;
 
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
+
 public class MaximumProductNSumSubArray {
 	
 	private static int max(int a,int b, int c) {
@@ -10,7 +14,7 @@ public class MaximumProductNSumSubArray {
 		return Math.min(Math.min(a, b),c); 
 	}
 	
-	public static int maximumSubArrayProduct(int[] A) {
+	public static int getMaximumSubArrayProduct(int[] A) {
 		if(A==null||A.length==0)
 			throw new IllegalArgumentException("Invalid input: Array is null or with no elements");
 		int currMin = 1;
@@ -33,7 +37,7 @@ public class MaximumProductNSumSubArray {
 	 * @param A
 	 * @return
 	 */
-	public static int[] maximumSubArraySum(int[] A) {
+	public static int[] getMaximumSubArraySum(int[] A) {
 		if(A==null||A.length==0)
 			throw new IllegalArgumentException("Invalid input: Array is null or with no elements");
 		int[] result = new int[3];
@@ -59,30 +63,63 @@ public class MaximumProductNSumSubArray {
 		return result;
 	}
 	
-	int[] LargestSubArrayWithEqualNumberOf0N1(int[] A) {
-		
+	public static int[] getLargestSubArrayWithEqualNumberOf0N1(int[] A) {
+		if(A==null||A.length==0)
+			throw new IllegalArgumentException("Invalid Input: null or empty Array");
+		int[] leftSum = new int[A.length];
+		int[] result = new int[3];
+		Arrays.fill(result, -1);
+		for(int i=0;i<A.length;++i) {
+			leftSum[i] = (A[i]==0 ? -1 : 1) + (i==0 ? 0 : leftSum[i-1]);
+			if(leftSum[i]==0) {
+				result[0] = i+1;
+				result[1] = 0;
+				result[2] = i;
+			}
+		}
+		Map<Integer,Integer> map = new HashMap<Integer,Integer>();
+		for(int i=0;i<A.length;++i)
+			if(!map.containsKey(A[i]))
+				map.put(A[i], i);
+			else {
+				int startIndex = map.get(A[i]);
+				int endIndex = i;
+				if(result[0] < endIndex - startIndex + 1) {
+					result[0] = endIndex - startIndex + 1;
+					result[1] = startIndex;
+					result[2] = endIndex;
+				}
+			}
+		return result;
 	}
 	
 	public static void main(String[] args) {
-		int[] A = {6, -3, -10, 0, 2};
+		/*int[] A = {6, -3, -10, 0, 2};
 		ArraysUtility.printArray(A);
-		System.out.println(maximumSubArrayProduct(A));
-		ArraysUtility.printArray(maximumSubArraySum(A));
+		System.out.println(getMaximumSubArrayProduct(A));
+		ArraysUtility.printArray(getMaximumSubArraySum(A));
 		int[] B = {-1, -3, -10, 0, 60};
 		ArraysUtility.printArray(B);
-		System.out.println(maximumSubArrayProduct(B));
-		ArraysUtility.printArray(maximumSubArraySum(B));
+		System.out.println(getMaximumSubArrayProduct(B));
+		ArraysUtility.printArray(getMaximumSubArraySum(B));
 		int[] C = {-2, -3, 0, -2, -40};
 		ArraysUtility.printArray(C);
-		System.out.println(maximumSubArrayProduct(C));
-		ArraysUtility.printArray(maximumSubArraySum(C));
+		System.out.println(getMaximumSubArrayProduct(C));
+		ArraysUtility.printArray(getMaximumSubArraySum(C));
 		int[] D = {0, 0, -20, 0};
 		ArraysUtility.printArray(D);
-		System.out.println(maximumSubArrayProduct(D));
-		ArraysUtility.printArray(maximumSubArraySum(D));
+		System.out.println(getMaximumSubArrayProduct(D));
+		ArraysUtility.printArray(getMaximumSubArraySum(D));
 		int[] E = {0, 0, 0};
 		ArraysUtility.printArray(E);
-		System.out.println(maximumSubArrayProduct(E));
-		ArraysUtility.printArray(maximumSubArraySum(E));
+		System.out.println(getMaximumSubArrayProduct(E));
+		ArraysUtility.printArray(getMaximumSubArraySum(E));*/
+		
+		int[] F = {1, 0, 1, 1, 1, 0, 0};
+		ArraysUtility.printArray(F);
+		ArraysUtility.printArray(getLargestSubArrayWithEqualNumberOf0N1(F));
+		
+		
+		
 	}
 }
