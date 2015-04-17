@@ -3,7 +3,7 @@
  * @author Akassh
  * 
  */
-package com.practice.challenge;
+package com.akassh.datastructure;
 import java.util.ArrayDeque;
 import java.util.Arrays;
 import java.util.Queue;

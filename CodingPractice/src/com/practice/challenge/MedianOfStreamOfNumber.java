@@ -4,6 +4,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
+import com.akassh.datastructure.Heap;
+
 public class MedianOfStreamOfNumber {
 	private static Heap left = new Heap(false);
 	private static Heap right = new Heap(true);

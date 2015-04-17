@@ -1,7 +1,7 @@
 /**
  * @author Akassh
  */
-package com.practice.challenge;
+package com.akassh.datastructure;
 
 import java.util.List;
 

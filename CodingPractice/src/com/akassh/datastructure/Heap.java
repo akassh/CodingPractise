@@ -1,4 +1,4 @@
-package com.practice.challenge;
+package com.akassh.datastructure;
 
 import java.util.ArrayList;
 import java.util.List;
