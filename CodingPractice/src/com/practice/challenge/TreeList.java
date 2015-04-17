@@ -5,6 +5,7 @@
  */
 package com.practice.challenge;
 import java.util.ArrayDeque;
+import java.util.Arrays;
 import java.util.Queue;
 
 class TreeNode<E> {
@@ -126,6 +127,38 @@ public class TreeList<T> {
 		return s;
 	}
 	
+	public static <T> void join(TreeNode<T> aList, TreeNode<T> bList) {
+		aList.right = bList;
+		bList.left = aList;
+	}
+	
+	public static <T> TreeNode<T> append(TreeNode<T> aList, TreeNode<T> bList) {
+		if(aList==null)
+			return bList;
+		if(bList==null)
+			return aList;
+		
+		TreeNode<T> aLast = aList.left;
+		TreeNode<T> bLast = bList.left;
+	
+		join(aLast,bList);
+		join(bLast,aList);
+			
+		return aList;
+	}
+	
+	public static <T> TreeNode<T> flatteningToDoublyLinkList(TreeNode<T> root) {
+		if(root==null) 
+			return null;
+		TreeNode<T> aList = flatteningToDoublyLinkList(root.left);
+		TreeNode<T> bList = flatteningToDoublyLinkList(root.right);
+		root.left = root;
+		root.right = root;
+		aList = append(aList,root);
+		aList = append(aList,bList);
+		return aList;
+	}
+	
 	public static <T> void flatteningToLinkList(TreeNode<T> root) {
 		if(root==null)
 			return;
@@ -141,6 +174,29 @@ public class TreeList<T> {
 			temp.right = r;
 			flatteningToLinkList(root.right);
 		}
+	}
+	
+	public static TreeNode<Integer> linkListToLevelOrderBinaryTree(ListNode<Integer> head) {
+		if(head==null)
+			return null;
+		TreeNode<Integer> root = new TreeNode<Integer>(head.val);
+		ListNode<Integer> curr = head.next;
+		Queue<TreeNode<Integer>> q = new ArrayDeque<TreeNode<Integer>>();
+		q.add(root);
+		while(!q.isEmpty()) {
+			TreeNode<Integer> p = q.poll();
+			if(curr!=null){
+				p.left = new TreeNode<Integer>(curr.val);
+				q.add(p.left);
+				curr = curr.next;
+				if(curr!=null){
+					p.right = new TreeNode<Integer>(curr.val);
+					q.add(p.right);
+					curr = curr.next;
+				}
+			}
+		}
+		return root;
 	}
 	
 	public void printLevelOrderUsingNext() {
@@ -187,13 +243,32 @@ public class TreeList<T> {
 		return s + "\n" + this.morrisTraversal();
 	}
 	
+	public static<T> void printCircularDoublyLinkList(TreeNode<T> root) {
+		if(root==null)
+			return;
+		TreeNode<T> t = root;
+		do {
+			System.out.println(t.val);
+			t = t.next;
+		} while(t!=null&&t!=root);
+		
+	}
+	
 	public static void main(String[] args) {
-		Integer[] a = {-8, -2, -4,10,0,7,0};
+		Integer[] a = {-8, -2, -4,10,7};
+		LinkedList<Integer> llist = new LinkedList<Integer>(Arrays.asList(a));
+		System.out.println(llist);
 		TreeList<Integer> list = new TreeList<Integer>();
-		list.sortedArraysToBinarySearchTree(a);
+		list.root = linkListToLevelOrderBinaryTree(llist.getHead());
 		System.out.println(list);
-		list.flatteningToLinkList(list.root);
-		System.out.println(list);
+		flatteningToDoublyLinkList(list.root);
+		printCircularDoublyLinkList(list.root);
+		/*
+		list.sortedArraysToBinarySearchTree(a);*/
+		//System.out.println(list);
+		//list.flatteningToLinkList(list.root);
+		//list.flatteningToDoublyLinkList(list.root);
+		//printCircularDoublyLinkList(list.root);
 		/*List<Integer> cList = new ArrayList<Integer>();;
 		System.out.println(list.maxSumOfRootToLeafPath(cList));
 		System.out.println(cList);

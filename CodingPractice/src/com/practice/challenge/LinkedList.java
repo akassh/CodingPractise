@@ -3,6 +3,8 @@
  */
 package com.practice.challenge;
 
+import java.util.List;
+
 class ListNode<E> {
 	
 	E val;
@@ -32,6 +34,13 @@ public class LinkedList<T> {
 
 	public LinkedList() {
 		
+	}
+	
+	public LinkedList(List<T> list) {
+		if(list!=null) {
+			for(T temp : list)
+				this.insertNodeInBeginning(temp);
+		}
 	}
 	
 	public LinkedList(ListNode<T> list) {
