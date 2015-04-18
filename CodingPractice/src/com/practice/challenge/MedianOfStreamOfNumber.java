@@ -3,7 +3,6 @@ package com.practice.challenge;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-
 import com.akassh.datastructure.Heap;
 
 public class MedianOfStreamOfNumber {
