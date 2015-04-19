@@ -75,12 +75,15 @@ public class InterLeavingStrings {
 					m[i][j] = m[i][j-1];
 				else if(j==0 && i<=s1.length() && s1.charAt(i-1)==c.charAt(i-1))
 					m[i][j] = m[i-1][j];
-				else if(i>=1 && j>=1 && i<=s1.length() && j<=s2.length() && s1.charAt(i-1)==c.charAt(i+j-1) && s2.charAt(j-1)!=c.charAt(i+j-1) )
-					m[i][j] = m[i-1][j];
-				else if(i>=1 && j>=1 && i<=s1.length() && j<=s2.length() && s1.charAt(i-1)!=c.charAt(i+j-1) && s2.charAt(j-1)==c.charAt(i+j-1) )
-					m[i][j] = m[i][j-1];
-				else if(i>=1 && j>=1 && i<=s1.length() && j<=s2.length() && s1.charAt(i-1)==c.charAt(i+j-1) && s2.charAt(j-1)==c.charAt(i+j-1) )
-					m[i][j] = m[i][j-1] || m[i-1][j] ;
+				else if(i>=1 && j>=1 && i<=s1.length() && j<=s2.length()) {
+					if(s1.charAt(i-1)==c.charAt(i+j-1) && s2.charAt(j-1)!=c.charAt(i+j-1))
+						m[i][j] = m[i-1][j];
+					else if(s1.charAt(i-1)!=c.charAt(i+j-1) && s2.charAt(j-1)==c.charAt(i+j-1) )
+						m[i][j] = m[i][j-1];
+					else if(s1.charAt(i-1)==c.charAt(i+j-1) && s2.charAt(j-1)==c.charAt(i+j-1) )
+						m[i][j] = m[i][j-1] || m[i-1][j] ;
+				}
+					
 			}
 		return m[s1.length()][s2.length()];
 	}
