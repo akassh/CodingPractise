@@ -33,9 +33,8 @@ public class NQueenProblem {
 	}
 	
 	private void countNQueenProblem(int i,int[] count) {
-		if(i==q.length) {
+		if(i==q.length)
 			++count[0];
-		}
 		else {
 			for(int k=0;k<q.length;++k) {
 				q[i] = k;
@@ -47,9 +46,7 @@ public class NQueenProblem {
 	
 	private boolean isSafe(int i) {
 		for(int k=0;k<i;++k)
-			if(q[k]==q[i])
-				return false;
-			else if(Math.abs(k-i)==Math.abs(q[k]-q[i]))
+			if(q[k]==q[i] || Math.abs(k-i)==Math.abs(q[k]-q[i]))
 				return false;
 		return true;
 	}

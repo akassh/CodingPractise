@@ -19,7 +19,8 @@ public class CuttingRod {
 		val[0] = 0;
 		for(int i=1,max = Integer.MIN_VALUE;i<val.length;val[i++] = max)
 			for(int j=0;j<i;++j)
-				max = Math.max(max, price[j] + val[i-j-1]);
+				if(max < (price[j] + val[i-j-1]))
+					max = price[j] + val[i-j-1];
 		return val[size];
 	}
 	

@@ -15,11 +15,11 @@ public class EggDroppingProblem {
 			return k;
 		else 
 			for(int i=1;i<=k;++i){
-				result = Math.max(eggDroppingProblemRecursive(n-1, k-1), eggDroppingProblemRecursive(n, k-i));
+				result = 1 + Math.max(eggDroppingProblemRecursive(n-1, k-1), eggDroppingProblemRecursive(n, k-i));
 				if(min > result)
 					min = result;
 			}
-		return min + 1;
+		return min;
 	}
 	
 	// O((k n^2)works
@@ -32,7 +32,7 @@ public class EggDroppingProblem {
 				else {
 					m[i][j] = Integer.MAX_VALUE;
 					for(int k=1;k<=i;++k) {
-						int min = 1+Math.max(m[k-1][j-1], m[i-k][j]);
+						int min = 1 + Math.max(m[k-1][j-1], m[i-k][j]);
 						if(m[i][j] > min) 
 							m[i][j] = min;
 					}
