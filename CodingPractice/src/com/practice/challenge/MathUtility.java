@@ -17,6 +17,12 @@ public class MathUtility {
 			return  x*result*result;
 	}
 	
+	public static int getNextHigherNumberWithSameNumberOfSetBit(int x) {
+		int u = (x&-x);
+		int v = u+x;
+		return v + (((v^x)/u) >> 2);
+	}
+	
 	public static int nextPowerOf2(int n) {
 		if(n!=0 && (n&(n-1))==0)
 			return n;
@@ -45,12 +51,25 @@ public class MathUtility {
 		return count;
 	}
 	
+	public static float sqrt(float n) {
+		float x = n;
+		float y = 1.0f;
+		float e = 0.00001f;
+		while(x-y>e) {
+			x = (x+y)/2;
+			y = n/x;
+		}
+		return x;
+	}
+	
 	public static void main(String[] args) {
 		for(int i=1;i<10;++i) {
 			//System.out.println(i + " - > " +MathUtility.pow(2, i));
-			System.out.println(i + " - > " +roundOff(1.7f));
+			//System.out.println(i + " - > " +roundOff(1.7f));
 			//System.out.println(i + " - > " +nextPowerOf2(i));
+			System.out.println(getNextHigherNumberWithSameNumberOfSetBit(i));
 		}
+		//System.out.println(sqrt(16));
 			
 	}
 }
