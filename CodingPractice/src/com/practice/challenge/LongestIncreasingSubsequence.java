@@ -66,7 +66,7 @@ public class LongestIncreasingSubsequence {
 		return high;
 	}
 	
-	//O(nLog(n))
+	//O(nLog(n)) Wrong
 	/**
 	 * @author Akassh
 	 * 
@@ -105,5 +105,9 @@ public class LongestIncreasingSubsequence {
 		ArraysUtility.printArray(getSizeOfLongestIncreasingSubsequence2(a));
 		System.out.println(longestIncreasingSubsequenceVersion2(a));
 		System.out.println(getSizeOfLongestIncreasingSubsequence(a));
+		
+		/*int b[] = {8,1,4,3,5,2};
+		ArraysUtility.printArray(b);
+		System.out.println(longestIncreasingSubsequenceVersion2(b));*/
 	}
 }

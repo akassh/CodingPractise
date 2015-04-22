@@ -42,7 +42,7 @@ public class StringCompliesWithPattern {
 	}
 	
 	public static void main(String[] args) {
-		System.out.println(complies(""));
+		System.out.println(complies("1235813"));
 		System.out.println(complies("224610"));
 		System.out.println(complies("11112233558"));
 		System.out.println(complies("1101102203"));
