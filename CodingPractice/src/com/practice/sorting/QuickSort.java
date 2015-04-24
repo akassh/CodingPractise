@@ -5,7 +5,7 @@ import java.util.Random;
 import com.practice.challenge.ArraysUtility;
 
 public class QuickSort {
-	public static void quickSort(int[] A) {
+	public static void sort(int[] A) {
 		quickSort(A, 0, A.length-1);
 	}
 	
