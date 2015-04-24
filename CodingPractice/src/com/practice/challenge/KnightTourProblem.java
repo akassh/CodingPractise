@@ -13,12 +13,12 @@ public class KnightTourProblem {
 		return !(x<0||y<0||x>=m.length||y>=m.length||m[x][y]!=0);
 	}
 	
-	public boolean getSolution() {
+	public boolean solve() {
 		m[0][0] = 1;
-		return getSolution(0, 0, 2);
+		return solve(0, 0, 2);
 	}
 	
-	private boolean getSolution(int currX, int currY, int count) {
+	private boolean solve(int currX, int currY, int count) {
 		if(count==m.length*m.length+1)
 			return true;
 		for(int i=0;i<x.length;++i) {
@@ -26,7 +26,7 @@ public class KnightTourProblem {
 			int newY = currY + y[i];
 			if(isSafe(newX, newY)) {
 				m[newX][newY] = count;
-				if(getSolution(newX, newY, count+1))
+				if(solve(newX, newY, count+1))
 					return true;
 				else 
 					m[newX][newY] = 0;
@@ -40,8 +40,8 @@ public class KnightTourProblem {
 	}
 	
 	public static void main(String[] args) {
-		KnightTourProblem k = new KnightTourProblem(8);
-		k.getSolution();
+		KnightTourProblem k = new KnightTourProblem(7);
+		k.solve();
 		k.printSolution();
 	}
 }
