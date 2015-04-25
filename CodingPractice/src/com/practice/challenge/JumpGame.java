@@ -1,5 +1,9 @@
 package com.practice.challenge;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 public class JumpGame {
 	public static boolean canJump(int[] A) {
         int[] jump = new int[A.length];
@@ -37,10 +41,70 @@ public class JumpGame {
 	                }
 	        }
 	        return jumps[jumps.length-1];
+	 }
+	 
+	 public static boolean jumpOptimized(int[] A) {
+        if(A==null)
+		    throw new IllegalArgumentException("Input array is null.");
+		if(A.length==1)
+            return true;
+		if(A.length==0||A[0]==0)
+	        return false;
+        int currPos = 0; 	//Tracking the Best Jump Point.
+        int currMax = 0; 	//Tracking How far can it Jump.
+        int tempMax = A[0]; //Temporary tracking the working set.
+        List<Integer> position = new ArrayList<Integer>(); // Track solution.
+        position.add(0);
+        for(int i=0;i<A.length;++i) {
+        	int max = i+A[i]; 	//Maximum reach represented by this position.
+        	if(max > currMax) {	//If this is the biggest jump in the working set.
+        		currMax = max; 	//remember the jump.
+        		currPos = i;	//remember the position.
+        	}
+        	if(i==tempMax) {			//If we exhausted the working set
+        		tempMax = currMax; 		//Best jump found in the working set. 
+        		position.add(currPos); 	//remember the position of the jump.
+        		currMax = 0;			//reset Jump and Position
+        		currPos = 0;
+        	}
+        	if(tempMax >= A.length-1)	//Bail out if we found the solution.
+        		return true;
 	    }
-	
+	    return false;
+	}
+	 
+	 public static List<Integer> getjumpPosition(int[] A) {
+	        if(A==null)
+			    throw new IllegalArgumentException("Input array is null.");
+			if(A.length==1)
+				return new ArrayList<Integer>(Arrays.asList(0));
+			if(A.length==0||A[0]==0)
+				return null;
+	        int currPos = 0; 	//Tracking the Best Jump Point.
+	        int currMax = 0; 	//Tracking How far can it Jump.
+	        int tempMax = A[0]; //Temporary tracking the working set.
+	        List<Integer> position = new ArrayList<Integer>(); // Track solution.
+	        position.add(0);
+	        for(int i=0;i<A.length;++i) {
+	        	int max = i+A[i]; 	//Maximum reach represented by this position.
+	        	if(max > currMax) {	//If this is the biggest jump in the working set.
+	        		currMax = max; 	//remember the jump.
+	        		currPos = i;	//remember the position.
+	        	}
+	        	if(i==tempMax) {			//If we exhausted the working set
+	        		tempMax = currMax; 		//Best jump found in the working set. 
+	        		position.add(currPos); 	//remember the position of the jump.
+	        		currMax = 0;			//reset Jump and Position
+	        		currPos = 0;
+	        	}
+	        	if(tempMax >= A.length-1)	//Bail out if we found the solution.
+	        		return position;
+		    }
+	        return null;
+		}
+	 
 	public static void main(String[] args) {
-		int[] A = {1,2};//{3,2,1,0,4};
-		System.out.println(jump(A));
+		int[] A = {2,0};//{3,2,1,0,4};
+		System.out.println(jumpOptimized(A));
 	}
 }
