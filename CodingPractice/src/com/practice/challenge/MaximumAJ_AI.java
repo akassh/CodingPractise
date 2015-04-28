@@ -2,7 +2,7 @@ package com.practice.challenge;
 
 import java.util.Arrays;
 
-public class MaximumJ_I {
+public class MaximumAJ_AI {
 	//RT O(n). S O(1)
 	public static int getMaximumDifference(int[] A) {
 		if(A==null||A.length==0)

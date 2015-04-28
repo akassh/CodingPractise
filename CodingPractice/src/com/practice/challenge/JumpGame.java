@@ -76,16 +76,17 @@ public class JumpGame {
 	 public static List<Integer> getjumpPosition(int[] A) {
 	        if(A==null)
 			    throw new IllegalArgumentException("Input array is null.");
+	        if(A.length==0||A[0]==0)
+				return null;
 			if(A.length==1)
 				return new ArrayList<Integer>(Arrays.asList(0));
-			if(A.length==0||A[0]==0)
-				return null;
 	        int currPos = 0; 	//Tracking the Best Jump Point.
 	        int currMax = 0; 	//Tracking How far can it Jump.
 	        int tempMax = A[0]; //Temporary tracking the working set.
 	        List<Integer> position = new ArrayList<Integer>(); // Track solution.
 	        position.add(0);
 	        for(int i=0;i<A.length;++i) {
+	        	assert A[i]>=0 : "Error: Input File Should contain non-negative integers";
 	        	int max = i+A[i]; 	//Maximum reach represented by this position.
 	        	if(max > currMax) {	//If this is the biggest jump in the working set.
 	        		currMax = max; 	//remember the jump.
@@ -97,14 +98,14 @@ public class JumpGame {
 	        		currMax = 0;			//reset Jump and Position
 	        		currPos = 0;
 	        	}
-	        	if(tempMax >= A.length-1)	//Bail out if we found the solution.
+	        	if(tempMax >= A.length)	//Bail out if we found the solution.
 	        		return position;
 		    }
 	        return null;
 		}
 	 
 	public static void main(String[] args) {
-		int[] A = {2,0};//{3,2,1,0,4};
-		System.out.println(jumpOptimized(A));
+		int[] A = {2,3,1,1,4};//{5, -6, 0, 4, 2, 4, 1, 0, 0, 4};//{3,2,1,0,4};//{0};//
+		System.out.println(getjumpPosition(A));
 	}
 }

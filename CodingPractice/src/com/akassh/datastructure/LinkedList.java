@@ -195,6 +195,38 @@ public class LinkedList<T> {
 		this.reverseList();
 	}
 	
+	public static ListNode<Integer> mergeSort(ListNode<Integer> h) {
+		if(h==null || h.next==null) 
+			return null;
+		ListNode<Integer> pm = (ListNode<Integer>) getPreviousOfMiddleNode(h);
+		if(pm==null)
+			return null;
+		ListNode<Integer> m 	= pm.next;
+			pm.next = null;
+		ListNode<Integer> r1 = mergeSort(h);
+		ListNode<Integer> r2 = mergeSort(m);
+		ListNode<Integer> merge = sortedMerge(r1, r2);
+		return merge;
+	}
+	
+	public static ListNode<Integer> sortedMerge(ListNode<Integer> a, ListNode<Integer> b) {
+		if(a==null)
+			return b;
+		if(b==null)
+			return a;
+		else {
+			ListNode<Integer> result =  null;
+			if(a.val.compareTo(b.val) <= 0) {
+				result = a;
+				result.next = sortedMerge(a.next, b);
+			} else {
+				result = b;
+				result.next = sortedMerge(a, b.next);
+			}
+			return result;
+		}
+	}
+	
 	@Override
 	public String toString() {
 		String s = "LinkedList [ ";
@@ -212,7 +244,7 @@ public class LinkedList<T> {
 	}
 	
 	public static void main(String[] args) {
-		LinkedList<Integer> list = new LinkedList<Integer>();
+		/*LinkedList<Integer> list = new LinkedList<Integer>();
 		for(int i=0;i<10;++i)
 			list.insertNodeInEnd(i);
 		System.out.println(list);
@@ -223,14 +255,16 @@ public class LinkedList<T> {
 		System.out.println(list);
 		list.deleteIfGreaterNodeOnRight();
 		System.out.println(list);
-		
+		*/
 		LinkedList<Integer> list2 = new LinkedList<Integer>();
 		int[] a = {12,15,10,11,5,6,2,3};
 		for (int i : a)
 			list2.insertNodeInEnd(i);
 		System.out.println(list2);
-		list2.deleteIfGreaterNodeOnRight();
+		mergeSort(list2.head);
 		System.out.println(list2);
+		//list2.deleteIfGreaterNodeOnRight();
+		//System.out.println(list2);
 	}
 
 }

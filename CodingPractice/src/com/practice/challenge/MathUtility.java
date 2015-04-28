@@ -1,6 +1,28 @@
 package com.practice.challenge;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public class MathUtility {
+	
+   public static boolean isHappy(int n) {
+        Set<Integer> s = new HashSet<Integer>();
+        int x = n;
+        while(true) {
+        	n = x;   
+        	x = 0;
+            while(n!=0) {
+            	int d = n%10;
+                x = x + (d * d);
+                n/=10;
+            }
+            if(s.contains(x))
+        		break;
+            s.add(x);
+        } 
+        return x==1;
+    }
+	
 	public static float pow(float x,int y) {
 		if(y==0)
 			return 1;
@@ -63,13 +85,13 @@ public class MathUtility {
 	}
 	
 	public static void main(String[] args) {
-		for(int i=1;i<10;++i) {
+		/*for(int i=1;i<10;++i) {
 			//System.out.println(i + " - > " +MathUtility.pow(2, i));
 			//System.out.println(i + " - > " +roundOff(1.7f));
 			//System.out.println(i + " - > " +nextPowerOf2(i));
 			System.out.println(getNextHigherNumberWithSameNumberOfSetBit(i));
-		}
+		}*/
 		//System.out.println(sqrt(16));
-			
+		System.out.println(isHappy(20));	
 	}
 }
