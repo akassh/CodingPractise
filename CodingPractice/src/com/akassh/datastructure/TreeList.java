@@ -62,6 +62,58 @@ public class TreeList<T> {
 		}
 	}
 	
+	public static void printRightSideOfTree(TreeNode<? extends Object> root) {
+		int[] level = new int[1];
+		printRightSideOfTree(root, 1, level);
+	}
+	
+	private static void printRightSideOfTree(TreeNode<? extends Object> root, int currLevel, int[] level) {
+		if(root==null)
+			return;
+		else 
+			if(currLevel > level[0]) {
+				level[0] = currLevel;
+				System.out.println(root.val);
+			}
+		printRightSideOfTree(root.right, currLevel+1, level);
+		printRightSideOfTree(root.left, currLevel+1, level);
+	}
+	
+	public static void printLeftSideOfTree(TreeNode<? extends Object> root) {
+		int[] level = new int[1];
+		printLeftSideOfTree(root, 1, level);
+	}
+	
+	private static void printLeftSideOfTree(TreeNode<? extends Object> root, int currLevel, int[] level) {
+		if(root==null)
+			return;
+		else 
+			if(currLevel > level[0]) {
+				level[0] = currLevel;
+				System.out.println(root.val);
+			}
+		printLeftSideOfTree(root.left, currLevel+1, level);
+		printLeftSideOfTree(root.right, currLevel+1, level);
+	}
+	
+	public static boolean isAllLeafAtSameLevel(TreeNode<?> root) {
+		int[] level = new int[1];
+		return isAllLeafAtSameLevel(root, 0, level);
+	}
+	
+	private static boolean isAllLeafAtSameLevel(TreeNode<?> root, int currLevel, int[] level) {
+		if(root==null)
+			return true;
+		if(root.left==null && root.right==null) {
+			if(level[0] == 0){
+				level[0] =  currLevel;
+				return true;
+			} 
+			return level[0] == currLevel;
+		}
+		else
+			return isAllLeafAtSameLevel(root.left, currLevel+1, level) && isAllLeafAtSameLevel(root.right, currLevel+1, level);
+	}
 	
 	//head needs to be outside for reference
 	private ListNode<T> head = null;
@@ -131,6 +183,8 @@ public class TreeList<T> {
 		aList.right = bList;
 		bList.left = aList;
 	}
+	
+	
 	
 	public static <T> TreeNode<T> append(TreeNode<T> aList, TreeNode<T> bList) {
 		if(aList==null)
@@ -251,18 +305,23 @@ public class TreeList<T> {
 			System.out.println(t.val);
 			t = t.next;
 		} while(t!=null&&t!=root);
-		
 	}
 	
 	public static void main(String[] args) {
-		Integer[] a = {-8, -2, -4,10,7};
+		Integer[] a = {-8, -2, -4,10, 7};
 		LinkedList<Integer> llist = new LinkedList<Integer>(Arrays.asList(a));
 		System.out.println(llist);
 		TreeList<Integer> list = new TreeList<Integer>();
-		list.root = linkListToLevelOrderBinaryTree(llist.getHead());
+		//list.root = linkListToLevelOrderBinaryTree(llist.getHead());
+		list.sortedLinkedListToBinarySearchTree(llist.getHead());
 		System.out.println(list);
+		System.out.println(isAllLeafAtSameLevel(list.root));
+		printLeftSideOfTree(list.root);
+		printRightSideOfTree(list.root);
+		
+		/*
 		flatteningToDoublyLinkList(list.root);
-		printCircularDoublyLinkList(list.root);
+		printCircularDoublyLinkList(list.root);*/
 		/*
 		list.sortedArraysToBinarySearchTree(a);*/
 		//System.out.println(list);
