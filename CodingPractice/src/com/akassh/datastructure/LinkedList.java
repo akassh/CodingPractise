@@ -198,6 +198,7 @@ public class LinkedList<T> {
 	public static ListNode<Integer> mergeSort(ListNode<Integer> h) {
 		if(h==null || h.next==null) 
 			return null;
+		@SuppressWarnings("unchecked")
 		ListNode<Integer> pm = (ListNode<Integer>) getPreviousOfMiddleNode(h);
 		if(pm==null)
 			return null;

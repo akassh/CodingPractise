@@ -18,7 +18,7 @@ public class IsomophicString {
         StringBuilder result = new StringBuilder("");
         for(int i=0;i<s.length();++i) {
             int num = map.get(s.charAt(i));
-            if(num > 9)
+            if(num < 10)
                 result.append("0" + num);
             else 
                 result.append(num);
