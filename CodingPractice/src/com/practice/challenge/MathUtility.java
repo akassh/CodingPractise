@@ -5,6 +5,13 @@ import java.util.Set;
 
 public class MathUtility {
 	
+	public static int rangeBitwiseAnd(int m, int n) {
+	    int mask = Integer.MAX_VALUE;
+	    while((mask&m)!=(mask&n)) 
+	        mask <<= 1;
+	    return mask & m;
+	}
+	
    public static boolean isHappy(int n) {
         Set<Integer> s = new HashSet<Integer>();
         int x = n;

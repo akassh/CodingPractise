@@ -1,5 +1,7 @@
 package com.practice.challenge;
-
+/**
+ * @author Akassh
+ */
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -36,9 +38,23 @@ public class RegularExpression {
 		return pattern.length() - 2*count;
 	}
 	
+	private static String convertOneOrMoreToZeroOrMoreOccurrence(String pattern) {
+		StringBuilder p = new StringBuilder(""); 
+		for(int i=0;i<pattern.length();++i) {
+			if(i+1< pattern.length() && pattern.charAt(i+1)=='?') {
+				p.append(pattern.charAt(i) + "" + pattern.charAt(i) + "*");
+				++i;
+			}
+			else 
+				p.append(pattern.charAt(i));
+		}
+		return p.toString();
+	}
+	
 	private static Map<Character, List<Pair>> generateStateMapping(String pattern) {
 		Map<Character, List<Pair>> states = new HashMap<Character, List<Pair>>();
 		int state = 0;
+		pattern = convertOneOrMoreToZeroOrMoreOccurrence(pattern);
 		for(int i=0;i<pattern.length();++i) {
 			if(i+1< pattern.length() && pattern.charAt(i+1)=='*') {
 				if(states.containsKey(pattern.charAt(i)))
@@ -105,8 +121,9 @@ public class RegularExpression {
 		/*System.out.println(isMatch("abbbc", "ab*c"));
 		System.out.println(isMatch("ac", "ab*c"));
 		System.out.println(isMatch("abbc", "ab*bbc"));*/
-		System.out.println(isMatch("abcdbcd", "a.*c.*d"));
-		//System.out.println(isMatch("aaaaaaabb", "a*bb"));
+		//System.out.println(isMatch("abcdbcd", "a.*c.*d"));
+		//System.out.println(isMatch("aaaaaaaaab", "a*a*a*a*a*a*a*a*a*a*c"));
+		System.out.println(convertOneOrMoreToZeroOrMoreOccurrence("a?b?c*"));
 		//System.out.println(isMatch("aaaaaaa", "a*"));
 		//System.out.println(generateStateMapping("a*b*c*") + "\n States : " + getLastState("a*b*c*") );
 		//System.out.println(generateStateMapping("a.*c.*d") + "\n States : " + getLastState("a.*c.*d") );
