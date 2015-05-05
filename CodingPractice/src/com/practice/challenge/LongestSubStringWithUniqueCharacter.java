@@ -18,7 +18,7 @@ public class LongestSubStringWithUniqueCharacter {
 				else {
 					if(max < curr)
 						max = curr;
-					curr = i-curr;
+					curr = i-prev;
 				}
 				visited.put(s.charAt(i), i);
 			}
@@ -42,9 +42,9 @@ public class LongestSubStringWithUniqueCharacter {
 				else {
 					if(max < curr) {
 						max = curr;
-						endIndex =  i - curr-1;
+						endIndex =  i - prev;
 					}
-					curr = i-curr;
+					curr = i-prev;
 				}
 				visited.put(s.charAt(i), i);
 			}
@@ -56,10 +56,10 @@ public class LongestSubStringWithUniqueCharacter {
 		}
 		
 		public static void main(String[] args) {
-			System.out.println(getLongestSubStringWithUniqueCharacterLength("GEEKSFORGEEKS"));
+	/*		System.out.println(getLongestSubStringWithUniqueCharacterLength("GEEKSFORGEEKS"));
 			System.out.println(getLongestSubStringWithUniqueCharacter("GEEKSFORGEEKS"));
-			
-			System.out.println(getLongestSubStringWithUniqueCharacterLength("AKASSHMISHRA"));
-			System.out.println(getLongestSubStringWithUniqueCharacter("AKASSHMISHRA"));
+		*/	
+			System.out.println(getLongestSubStringWithUniqueCharacterLength("AKASSH"));
+			System.out.println(getLongestSubStringWithUniqueCharacter("AKASSH"));
 		}
 }
