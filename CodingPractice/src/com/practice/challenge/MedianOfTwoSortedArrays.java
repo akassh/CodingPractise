@@ -77,7 +77,7 @@ public class MedianOfTwoSortedArrays {
 	}
 	
 	public static void main(String[] args) {
-		/*int[] A = {1,2,4,8,9,10};//{900};//
+		int[] A = {1,2,4,8,9,10};//{900};//
 		int[] B = {3,5,6,7};//{5, 8, 10, 20};//
 		System.out.println(medianOfTwoArrays(A, 0, A.length-1, B, 0, B.length-1));
 		
@@ -88,7 +88,7 @@ public class MedianOfTwoSortedArrays {
 		int[] E = {2, 3, 4, 5, 6, 7, 8};
 		int[] F = {1};
 		System.out.println(medianOfTwoArrays(E, 0, E.length-1, F, 0, F.length-1));
-		*/
+		
 		int[] G = {6,7,8};
 		int[] H = {1,2,3,4,5};
 		System.out.println(medianOfTwoArrays(G, 0, G.length-1, H, 0, H.length-1));

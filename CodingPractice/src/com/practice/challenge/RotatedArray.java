@@ -1,6 +1,32 @@
 package com.practice.challenge;
 
 public class RotatedArray {
+	
+	public static int searchInRotatedArray(int[] A, int t) {
+		assert(A!=null);
+		int low = 0;
+		int high = A.length-1;
+		while(low<=high) {
+			int mid = low + (high-low)/2;
+			if(A[mid]==t)
+				return mid;
+			if(A[low] <= A[mid]) {
+				if(A[low] <= t && t < A[mid])
+					high = mid - 1;
+				else 
+					low = mid + 1;
+			}
+			else {
+				if(A[mid] < t && t <= A[high])
+					low = mid + 1;
+				else 
+					high = mid - 1;
+			}
+		}
+		return -1;
+	}
+	
+	
 	public static int getMaximumElementIndexInRotatedArray(int[] A) {
 		if(A==null||A.length==0)
 			throw new IllegalArgumentException("Input array is null or empty");
@@ -46,10 +72,12 @@ public class RotatedArray {
 	public static void main(String[] args) {
 		int[] A = {1,2,3,4,5,6};
 		ArraysUtility.printArray(A);
+		System.out.println(searchInRotatedArray(A, 5));
 		System.out.println(getMaximumElementIndexInRotatedArray(A));
 		System.out.println(getMinimumElementIndexInRotatedArray(A));
 		int[] B = {4,5,6,1,2,3};
 		ArraysUtility.printArray(B);
+		System.out.println(searchInRotatedArray(B, 4));
 		System.out.println(getMaximumElementIndexInRotatedArray(B));
 		System.out.println(getMinimumElementIndexInRotatedArray(B));
 		int[] C = {2,2,2,3,1};
@@ -58,10 +86,12 @@ public class RotatedArray {
 		System.out.println(getMinimumElementIndexInRotatedArray(C));
 		int[] E = {1,2,3,4,5};
 		ArraysUtility.printArray(E);
+		System.out.println(searchInRotatedArray(E, 6));
 		System.out.println(getMaximumElementIndexInRotatedArray(E));
 		System.out.println(getMinimumElementIndexInRotatedArray(E));
 		int[] G = {3,1};
 		ArraysUtility.printArray(G);
+		System.out.println(searchInRotatedArray(G, 1));
 		System.out.println(getMaximumElementIndexInRotatedArray(G));
 		System.out.println(getMinimumElementIndexInRotatedArray(G));
 		int[] H = {3,0,1,1,1,3};
