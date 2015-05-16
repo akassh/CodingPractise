@@ -13,17 +13,17 @@ public class LargestSubarrayWithEqual0N1 {
 			else 
 				ls[i] = ((A[i]==0) ? -1 : 1) + ls[i-1];
 		int maxLen = 0;
-		int index = -1;
+		//int index = -1;
 		Map<Integer, Integer> visited = new HashMap<Integer, Integer>();
 		for(int i=0;i<A.length;++i) {
 			if(ls[i]==0 && i+1>maxLen) {
 				maxLen = i+1;
-				index = 0; 
+				//index = 0; 
 			} else {
 				if(visited.containsKey(ls[i])) {
 					if(i-visited.get(ls[i]) > maxLen) {
 						maxLen = i-visited.get(ls[i]);
-						index = visited.get(ls[i])+1;
+						//index = visited.get(ls[i])+1;
 					}
 				}
 				else 
