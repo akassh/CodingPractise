@@ -40,7 +40,8 @@ public class WordLadder {
 		q.add(s);
 		outer: while(!q.isEmpty()) {
 			String t = q.poll();
-			res.add(t);
+			if(!visited.contains(t))
+				res.add(t);
 			visited.add(t);
 			if(t.equals(e))
 				break;

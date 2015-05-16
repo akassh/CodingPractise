@@ -31,10 +31,30 @@ public class SnakeNLadders {
 		return snl;
 	}
 	
+	public static int[][] getSnakeNLadder(int size) {
+		assert(size>0);
+		int[][] m = new int[size][size];
+		int k = size-1;
+		int c = 1;
+		while(k>=0) {
+			if((size-1)%2==k%2) {
+				for(int i=0;i<size;++i)
+					m[k][i] = c++;
+				--k;
+			}
+			else {
+				for(int i=size-1;i>=0;--i)
+					m[k][i] = c++;
+				--k;
+			}
+		}
+		return m;
+	}
+	
 	public static void main(String[] args) throws NumberFormatException, IOException {
 		int n = Integer.parseInt(new BufferedReader(new InputStreamReader(System.in)).readLine());
 		for(int i=1; i<=n; i++){
-			printMatrix(generateMatrix(i));
+			printMatrix(getSnakeNLadder(i));
 			System.out.println();
 		}
 	}
