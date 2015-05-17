@@ -15,7 +15,7 @@ public class InterLeavingStrings {
 		if(s1==null||s2==null)
 			throw new IllegalArgumentException(" String parameters cannot be null!!!");
 		List<String> interLeavedList = new ArrayList<String>();
-		getListOfInterLeavingOfTwoString( s1, s2, 0, 0, "", interLeavedList);
+		getListOfInterLeavingOfTwoString( s1, s2, "", interLeavedList);
 		return interLeavedList.toArray(new String[interLeavedList.size()]);
 	}
 	
@@ -28,7 +28,7 @@ public class InterLeavingStrings {
 			printInterLeavingOfTwoString( s1, s2, i, j+1, interLeavedString + s2.charAt(j));
 	}	
 	
-	private void getListOfInterLeavingOfTwoString(String s1, String s2, int i, int j, String interLeavedString, List<String> interLeavedList) {
+	/*private void getListOfInterLeavingOfTwoString(String s1, String s2, int i, int j, String interLeavedString, List<String> interLeavedList) {
 		if(interLeavedList==null)
 			return;
 		if(i==s1.length() && j==s2.length())
@@ -37,6 +37,17 @@ public class InterLeavingStrings {
 			getListOfInterLeavingOfTwoString( s1, s2, i+1, j, interLeavedString + s1.charAt(i), interLeavedList);
 		if(j!=s2.length())
 			getListOfInterLeavingOfTwoString( s1, s2, i, j+1, interLeavedString + s2.charAt(j), interLeavedList);
+	}*/
+	
+	private void getListOfInterLeavingOfTwoString(String s1, String s2, String interLeavedString, List<String> interLeavedList) {
+		if(interLeavedList==null)
+			return;
+		if(s1.isEmpty() && s2.isEmpty())
+			interLeavedList.add(interLeavedString);
+		if(!s1.isEmpty())
+			getListOfInterLeavingOfTwoString( s1.substring(1), s2, interLeavedString + s1.charAt(0), interLeavedList);
+		if(!s2.isEmpty())
+			getListOfInterLeavingOfTwoString( s1, s2.substring(1), interLeavedString + s2.charAt(0), interLeavedList);
 	}
 	
 	/**

@@ -15,7 +15,7 @@ public class LargestSubarrayWithEqual0N1 {
 		int maxLen = 0;
 		//int index = -1;
 		Map<Integer, Integer> visited = new HashMap<Integer, Integer>();
-		for(int i=0;i<A.length;++i) {
+		for(int i=0;i<A.length;++i)
 			if(ls[i]==0 && i+1>maxLen) {
 				maxLen = i+1;
 				//index = 0; 
@@ -29,7 +29,6 @@ public class LargestSubarrayWithEqual0N1 {
 				else 
 					visited.put(ls[i], i);
 			}
-		}
 		return maxLen;
 	}
 	
