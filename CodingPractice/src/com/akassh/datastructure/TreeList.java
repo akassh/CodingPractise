@@ -24,7 +24,6 @@ class TreeNode<E> {
 
 public class TreeList<T> {
 	
-	
 	TreeNode<T> root;
 	
 	private TreeNode<T> getNextNode(TreeNode<T> p) {
@@ -207,6 +206,17 @@ public class TreeList<T> {
 		bList.left = aList;
 	}
 	
+	TreeNode<T> getLongestCommonAncestor(TreeNode<T> root, TreeNode<T> n1, TreeNode<T> n2) {
+		if(root==null)
+			return null;
+		if(root==n1||root==n2)
+			return root;
+		TreeNode<T> l = getLongestCommonAncestor( root.left , n1, n2);
+		TreeNode<T> r = getLongestCommonAncestor( root.right, n1, n2);
+		if(l != null && r != null)
+			return root;
+		return l != null ? l : r;
+	}
 	
 	
 	public static <T> TreeNode<T> append(TreeNode<T> aList, TreeNode<T> bList) {

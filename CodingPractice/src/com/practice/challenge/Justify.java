@@ -48,6 +48,6 @@ public class Justify {
     }
 	
 	public static void main(String[] args) {
-		System.out.println(fullJustify(new String("Geeks for geeks").split(" "), 6));
+		System.out.println(fullJustify(new String("Geeks for geeks").split(" "), 10));
 	}
 }
