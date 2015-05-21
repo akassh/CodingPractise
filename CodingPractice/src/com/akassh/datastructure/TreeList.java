@@ -62,6 +62,29 @@ public class TreeList<T> {
 		}
 	}
 	
+	public static TreeNode<Integer> getMax(TreeNode<Integer> root) {
+		if(root==null)
+			return null;
+		TreeNode<Integer> curr = root;
+		while(curr.right!=null)
+			curr = curr.right;
+		return curr;
+	}
+	
+	public static TreeNode<Integer> getSecondMax(TreeNode<Integer> root) {
+		if(root==null)
+			return null;
+		TreeNode<Integer> curr = root;
+		while(curr!=null) {
+			if(curr.right==null)
+				return getMax(curr.left);
+			if(curr.right.left==null && curr.right.right==null)
+				return curr;
+			curr = curr.right;
+		}
+		return null;
+	}
+	
 	public static void printRightSideOfTree(TreeNode<? extends Object> root) {
 		int[] level = new int[1];
 		printRightSideOfTree(root, 1, level);
